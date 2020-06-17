@@ -2,6 +2,9 @@
 ###### Script for organizing NY weather data    ######
 ###### from NOAA                                ######
 ######################################################
+install.packages("rnoaa")
+library(rnoaa)
 
-datW <- read.csv("c:\\Users\\hkropp\\Google Drive\\NY_spring\\2185792.csv", 
-		na.strings=c("NA",""))
+Sys.setenv(RNOAA_GHCND_BASE_URL =
+"ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/all")
+test <- ghcnd("USC00300023")
