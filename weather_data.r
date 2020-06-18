@@ -46,39 +46,46 @@ stations <- inner_join(stationsA, NYstations, by="station_id")
 
 datW <- list()
 
-for(i in 1:1){
+
+write.table(stations, paste0(outDir,"\\station_info.csv"),sep=",")
+
+
+for(i in 1:195){
 	
 	datW <- ghcnd_search(paste(stations$station_id[i]), var=c("TMAX", "TMIN","TAVG","PRCP"))
-	dir.create(paste0(outDir,"\\",stations$station_id[i]))
+	
 		for(j in 1:length(datW)){
 			
-			write.table(datW[[j]], paste0(outDir,"\\",stations$station_id[i],"\\",stations$station_id[i],"_",colnames(datW[[j]][2]),".csv"),
+			write.table(datW[[j]], paste0(outDir,"\\stations\\",stations$station_id[i],"_",colnames(datW[[j]][2]),".csv"),
 			sep=",")
 		}
+	print(paste("done station",stations$station_id[i], "number ",i)	)
 }
+#missing all variables of intest
+datW <- ghcnd_search(paste(stations$station_id[196]), var=c("TMAX", "TMIN","TAVG","PRCP"))
 
-
-for(i in 2:300){
+for(i in 197:1043){
 	
 	datW <- ghcnd_search(paste(stations$station_id[i]), var=c("TMAX", "TMIN","TAVG","PRCP"))
-	dir.create(paste0(outDir,"\\",stations$station_id[i]))
+	
 		for(j in 1:length(datW)){
 			
-			write.table(datW[[j]], paste0(outDir,"\\",stations$station_id[i],"\\",stations$station_id[i],"_",colnames(datW[[j]][2]),".csv"),
+			write.table(datW[[j]], paste0(outDir,"\\stations\\",stations$station_id[i],"_",colnames(datW[[j]][2]),".csv"),
 			sep=",")
 		}
 	print(paste("done station",stations$station_id[i], "number ",i)	)
 }
 
+#missing all variables of intest
+datW <- ghcnd_search(paste(stations$station_id[1044]), var=c("TMAX", "TMIN","TAVG","PRCP"))
 
-
-for(i in 301:nrow(stations)){
+for(i in 1045:nrow(stations)){
 	
 	datW <- ghcnd_search(paste(stations$station_id[i]), var=c("TMAX", "TMIN","TAVG","PRCP"))
-	dir.create(paste0(outDir,"\\",stations$station_id[i]))
+	
 		for(j in 1:length(datW)){
 			
-			write.table(datW[[j]], paste0(outDir,"\\",stations$station_id[i],"\\",stations$station_id[i],"_",colnames(datW[[j]][2]),".csv"),
+			write.table(datW[[j]], paste0(outDir,"\\stations\\",stations$station_id[i],"_",colnames(datW[[j]][2]),".csv"),
 			sep=",")
 		}
 	print(paste("done station",stations$station_id[i], "number ",i)	)
