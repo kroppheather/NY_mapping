@@ -8,3 +8,4 @@ library(rnoaa)
 Sys.setenv(RNOAA_GHCND_BASE_URL =
 "ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/all")
 test <- ghcnd("USC00300023")
+
