@@ -8,11 +8,12 @@ library(rgdal)
 library(rgeos)
 
 #set directory for data output
-outDir <- "C:\\Users\\hkropp\\Google Drive\\NY_spring\\NYweather"
+outDir <- "/Users/hkropp/Google Drive/GIS/NYnoaa"
 
 Sys.setenv(RNOAA_GHCND_BASE_URL =
 "ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/all")
 #stations to work with
+station <- read.csv("/Users/hkropp/Google Drive/GIS/NYnoaa/station_info.csv")
 
 ##########get all stations in NY##################
 
@@ -49,7 +50,11 @@ datW <- list()
 
 write.table(stations, paste0(outDir,"\\station_info.csv"),sep=",")
 
-
+##########download##################
+datW <- test <- ghcnd_search("USC00305676", var=c("TMAX", "TMIN","TAVG","PRCP"))
+                     
+                     
+                     
 for(i in 1:195){
 	
 	datW <- ghcnd_search(paste(stations$station_id[i]), var=c("TMAX", "TMIN","TAVG","PRCP"))
@@ -57,7 +62,7 @@ for(i in 1:195){
 		for(j in 1:length(datW)){
 			
 			write.table(datW[[j]], paste0(outDir,"\\stations\\",stations$station_id[i],"_",colnames(datW[[j]][2]),".csv"),
-			sep=",")
+			sep=",", row.names = FALSE)
 		}
 	print(paste("done station",stations$station_id[i], "number ",i)	)
 }
